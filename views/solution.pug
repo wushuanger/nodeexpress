@@ -1,0 +1,15 @@
+extends layout
+
+block content 
+    h1=solution.title
+    h5 requested by #{client}
+   
+    h5 with skills of #{solution.skill}
+    p=solution.body
+
+    hr
+    if user
+        if user.id ==solution.client 
+            a.btn.btn-default(href='/solutions/edit/'+solution._id) Edit
+            a.btn.btn-danger.delete-solution(href='#', data-id=solution._id) Delete
+

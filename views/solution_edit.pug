@@ -1,0 +1,16 @@
+extends layout
+
+block content
+    h1 #{title}
+     form(method = 'POST', action='/solutions/edit/'+solution._id)
+        #form-group
+            label Title:
+            input.form-control(name='title', type='text', value=solution.title)
+        #form-group
+            label Skill:
+            input.form-control(name='skill', type='text', value=solution.skill)
+        #form-group
+            label Body:
+            textarea.form-control(name='body')=solution.body 
+            br
+        input.btn.btn-primary(type='submit', value='Submit')

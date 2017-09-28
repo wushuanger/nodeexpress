@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    h1 #{title}
+    ul
+        each solution, i in solutions
+            li.list-group-item
+                a(href="/solutions/" + solution.id)=solution.title
+            
+
+
+
