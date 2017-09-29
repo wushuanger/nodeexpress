@@ -98,16 +98,29 @@ router.post('/edit/:id',function(req, res){
     return;
 });
 
-router.delete('/:id', function(req, res){
-    let query = {_id:req.params.id}
-    Solution.remove(query, function(err){
-        if(err){
-            console.log(err);
-        }
-        res.send('Success');
-    });
 
+// Delete Solution
+router.delete('/:id', function(req, res){
+    if(!req.user._id){
+        res.status(500).send();
+    }
+
+    let query = {_id:req.params.id}
+
+    Solution.findById(req.params.id, function(err, solution){
+        if(solution.client != req.user._id){
+            res.status(500).send();
+        } else {
+            Solution.remove(query, function(err){
+                if(err){
+                    console.log(err);
+                }
+                res.send('Success');
+            });
+        }
+    });
 });
+
 
 // Get Single Solution
 router.get('/:id', function(req,res){
